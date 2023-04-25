@@ -32,17 +32,19 @@ void merge(int *array, int *left, int leftSize, int *right, int rightSize)
 void merge_sort(int *array, size_t size)
 {
 	if (size < 2)
-		return (size);
+		return;
 
 	int mid = size / 2;
 
 	int *left = (int *)malloc(mid * sizeof(int));
 	int *right = (int *)malloc((size - mid) * sizeof(int));
 
-	for (int i = 0; i < mid; i++)
+	int i;
+
+	for (i = 0; i < mid; i++)
 		left[i] = array[i];
 
-	for (int i = mid; i < size; i++)
+	for (i = mid; i < size; i++)
 		right[i - mid] = array[i];
 
 	merge_sort(left, mid);
@@ -53,6 +55,6 @@ void merge_sort(int *array, size_t size)
 	free(left);
 	free(right);
 
-	for (int i = 0; i < size; i++)
+	for (i = 0; i < size; i++)
 		printf("%d%s", array[i], i == size - 1 ? "\n" : " ");
 }
