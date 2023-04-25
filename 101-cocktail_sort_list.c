@@ -13,34 +13,46 @@
 
 void cocktail_sort_list(listint_t **list)
 {
-    listint_t *left = NULL, *right = NULL, *curr = NULL;
-    int swapped = 0;
+	listint_t *left = NULL, *right = NULL, *curr = NULL;
+	int swapped = 0;
 
-    if (list == NULL || *list == NULL || (*list)->next == NULL)
-        return;
+	if (list == NULL || *list == NULL || (*list)->next == NULL)
+		return;
 
-    do {
-        swapped = 0;
-        for (left = *list; left->next != NULL; left = left->next) {
-            if (left->n > left->next->n) {
-                swap_nodes(list, left, left->next);
-                swapped = 1;
-                print_list(*list);
-            }
-        }
-        if (swapped == 0)
-            break;
-        swapped = 0;
-        for (right = left->prev; right != NULL; right = right->prev) {
-            if (right->prev == NULL)
-                break;
-            if (right->n < right->prev->n) {
-                swap_nodes(list, right->prev, right);
-                swapped = 1;
-                print_list(*list);
-            }
-        }
-    } while (swapped);
+	do {
+		swapped = 0;
+
+		for (left = *list; left->next != NULL; left = left->next)
+		{
+			if (left->n > left->next->n)
+			{
+				swap_nodes(list, left, left->next);
+				swapped = 1;
+
+				print_list(*list);
+			}
+		}
+		if (swapped == 0)
+			break;
+
+		swapped = 0;
+
+		for (right = left->prev; right != NULL; right = right->prev)
+		{
+
+			if (right->prev == NULL)
+				break;
+
+			if (right->n < right->prev->n)
+			{
+
+				swap_nodes(list, right->prev, right);
+				swapped = 1;
+
+				print_list(*list);
+			}
+		}
+	}
 }
 
 /**
@@ -55,22 +67,23 @@ void cocktail_sort_list(listint_t **list)
 
 void swap_nodes(listint_t **list, listint_t *node1, listint_t *node2)
 {
-    listint_t *temp1 = NULL, *temp2 = NULL;
+	listint_t *temp1 = NULL, *temp2 = NULL;
 
-    if (node1 == NULL || node2 == NULL)
-        return;
+	if (node1 == NULL || node2 == NULL)
+		return;
 
-    if (node1->prev != NULL)
-        node1->prev->next = node2;
-    else
-        *list = node2;
-    if (node2->next != NULL)
-        node2->next->prev = node1;
-    temp1 = node1->prev;
-    temp2 = node2->next;
-    node2->next = node1;
-    node1->prev = node2;
-    node1->next = temp2;
-    node2->prev = temp1;
+	if (node1->prev != NULL)
+		node1->prev->next = node2;
+	else
+		*list = node2;
+
+	if (node2->next != NULL)
+		node2->next->prev = node1;
+
+	temp1 = node1->prev;
+	temp2 = node2->next;
+	node2->next = node1;
+	node1->prev = node2;
+	node1->next = temp2;
+	node2->prev = temp1;
 }
-
