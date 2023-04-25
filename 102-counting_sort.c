@@ -51,7 +51,7 @@ void counting_sort(int *array, size_t size)
 	for (i = 0; i < size; i++)
 		array[i] = sorted_array[i];
 
-	print_array(count_array, max_num + 1);
+	print_array(count_array, max_num + 2);
 
 	free(count_array);
 	free(sorted_array);
