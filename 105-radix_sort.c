@@ -11,56 +11,56 @@
  */
 void radix_sort(int *array, size_t size)
 {
-    int i, exp = 1, max_val = 0;
-    int *output, *count;
+	int i, exp = 1, max_val = 0;
+	int *output, *count;
 
-    if (size < 2)
-        return;
+	if (size < 2)
+		return;
 
-    output = malloc(sizeof(int) * size);
-    if (output == NULL)
-        return;
-    count = malloc(sizeof(int) * 10);
-    if (count == NULL)
-    {
-        free(output);
-        return;
-    }
+	output = malloc(sizeof(int) * size);
+	if (output == NULL)
+		return;
 
-    for (i = 0; i < (int) size; i++)
-        if (array[i] > max_val)
-            max_val = array[i];
+	count = malloc(sizeof(int) * 10);
+	if (count == NULL)
+	{
+		free(output);
+		return;
+	}
 
-    while (max_val / exp > 0)
-    {
-        for (i = 0; i < 10; i++)
-            count[i] = 0;
+	for (i = 0; i < (int) size; i++)
+	if (array[i] > max_val)
+		max_val = array[i];
 
-        for (i = 0; i < (int) size; i++)
-            count[(array[i] / exp) % 10]++;
+	while (max_val / exp > 0)
+	{
+		for (i = 0; i < 10; i++)
+			count[i] = 0;
 
-        for (i = 1; i < 10; i++)
-            count[i] += count[i - 1];
+		for (i = 0; i < (int) size; i++)
+			count[(array[i] / exp) % 10]++;
 
-        for (i = (int) size - 1; i >= 0; i--)
-        {
-            output[count[(array[i] / exp) % 10] - 1] = array[i];
-            count[(array[i] / exp) % 10]--;
-        }
+		for (i = 1; i < 10; i++)
+			count[i] += count[i - 1];
 
-        for (i = 0; i < (int) size; i++)
-            array[i] = output[i];
+		for (i = (int) size - 1; i >= 0; i--)
+		{
+			output[count[(array[i] / exp) % 10] - 1] = array[i];
+			count[(array[i] / exp) % 10]--;
+		}
 
-        exp *= 10;
+		for (i = 0; i < (int) size; i++)
+			array[i] = output[i];
 
-        /* Print the array after each iteration */
-        printf("Result at digit %d: ", exp / 10);
-        for (i = 0; i < (int) size; i++)
-            printf("%d ", array[i]);
-        printf("\n");
-    }
+		exp *= 10;
 
-    free(output);
-    free(count);
+		/* Print the array after each iteration */
+		printf("Result at digit %d: ", exp / 10);
+		for (i = 0; i < (int) size; i++)
+			printf("%d ", array[i]);
+			printf("\n");
+	}
+
+	free(output);
+	free(count);
 }
-
