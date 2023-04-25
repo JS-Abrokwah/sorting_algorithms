@@ -14,30 +14,33 @@ void quick_sort_hoare(int *array, size_t size);
  */
 int partition(int *array, int low, int high, size_t size)
 {
-    int pivot = array[high];
-    int i = low - 1;
-    int j = high + 1;
+	int pivot = array[high];
+	int i = low - 1;
+	int j = high + 1;
 
-    while (1)
-    {
-        do {
-            i++;
-        } while (array[i] < pivot);
+	while (1)
+	{
+		do {
+			i++;
+		} while (array[i] < pivot);
 
-        do {
-            j--;
-        } while (array[j] > pivot);
+		do {
+			j--;
+		} while (array[j] > pivot);
 
-        if (i >= j)
-            return (j);
+		if (i >= j)
+			return (j);
 
-        int temp = array[i];
-        array[i] = array[j];
-        array[j] = temp;
+		int temp = array[i];
 
-        for (size_t k = 0; k < size; k++)
-            printf("%d%s", array[k], k == size - 1 ? "\n" : ", ");
-    }
+		array[i] = array[j];
+		array[j] = temp;
+
+		size_t k;
+
+		for (k = 0; k < size; k++)
+			printf("%d%s", array[k], k == size - 1 ? "\n" : ", ");
+	}
 }
 
 /**
@@ -50,13 +53,14 @@ int partition(int *array, int low, int high, size_t size)
  */
 void quicksort_hoare_recursive(int *array, int low, int high, size_t size)
 {
-    if (low < high)
-    {
-        int pivot_index = partition(array, low, high, size);
 
-        quicksort_hoare_recursive(array, low, pivot_index, size);
-        quicksort_hoare_recursive(array, pivot_index + 1, high, size);
-    }
+	if (low < high)
+	{
+		int pivot_index = partition(array, low, high, size);
+
+		quicksort_hoare_recursive(array, low, pivot_index, size);
+		quicksort_hoare_recursive(array, pivot_index + 1, high, size);
+	}
 }
 
 /**
@@ -67,9 +71,8 @@ void quicksort_hoare_recursive(int *array, int low, int high, size_t size)
  */
 void quick_sort_hoare(int *array, size_t size)
 {
-    if (!array || size < 2)
-        return;
+	if (!array || size < 2)
+		return;
 
-    quicksort_hoare_recursive(array, 0, size - 1, size);
+	quicksort_hoare_recursive(array, 0, size - 1, size);
 }
-
