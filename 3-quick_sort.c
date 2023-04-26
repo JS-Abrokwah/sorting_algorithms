@@ -1,6 +1,11 @@
 #include <stdio.h>
-#include <stdlib>
+#include <stdlib.h>
 #include "sort.h"
+
+void quick_sort_helper(int *array, int lo, int hi, size_t size);
+int lomuto_partition(int *array, int lo, int hi, size_t size);
+void swap(int *array, ssize_t a, ssize_t b);
+
 
 /**
  * quick_sort - sorts an array of integers in ascending order
@@ -62,7 +67,7 @@ int lomuto_partition(int *array, int lo, int hi, size_t size)
 	}
 	if (array[current] != array[hi])
 	{
-		swap(array, current, last);
+		swap(array, current, hi);
 		print_array(array, size);
 	}
 	return (current);
@@ -73,7 +78,7 @@ int lomuto_partition(int *array, int lo, int hi, size_t size)
  * @a: first element
  * @b: second element
  */
-void swap(int array, ssize a, ssize b)
+void swap(int *array, ssize_t a, ssize_t b)
 {
 	int tmp;
 

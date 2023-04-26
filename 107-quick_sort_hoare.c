@@ -2,7 +2,9 @@
 #include <stdlib.h>
 #include "sort.h"
 
-void quick_sort_hoare(int *array, size_t size);
+int partition(int *array, int low, int high, size_t size);
+void quicksort_hoare_recursive(int *array, int low, int high, size_t size);
+void swap_ints(int *a, int *b);
 
 /**
  * partition - function that partitions an array according to the Hoare scheme
@@ -75,4 +77,18 @@ void quick_sort_hoare(int *array, size_t size)
 		return;
 
 	quicksort_hoare_recursive(array, 0, size - 1, size);
+}
+
+/**
+ * swap_ints - Swap two integers in an array.
+ * @a: The first integer to swap.
+ * @b: The second integer to swap.
+ */
+void swap_ints(int *a, int *b)
+{
+	int tmp;
+
+	tmp = *a;
+	*a = *b;
+	*b = tmp;
 }
