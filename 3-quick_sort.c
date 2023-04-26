@@ -46,34 +46,38 @@ void quick_sort_helper(int *array, int lo, int hi, size_t size)
 int lomuto_partition(int *array, int lo, int hi, size_t size)
 {
 	int pivot = array[hi];
-	int i = lo - 1;
-	int j;
+	ssize_t current = lo, j;
 
 	for (j = lo; j < hi; j++)
 	{
-		if (array[j] <= pivot)
+		if (array[j] < pivot)
 		{
-			i++;
-			swap(array + i, array + j);
-			print_array(array, size);
+			if (array[current] != array[j])
+			{
+				swap(array, current, j);
+				print_array(array, size);
+			}
+			current++;
 		}
 	}
-
-	swap(array + (i + 1), array + hi);
-	print_array(array, size);
-
-	return (i + 1);
+	if (array[current] != array[hi])
+	{
+		swap(array, current, last);
+		print_array(array, size);
+	}
+	return (current);
 }
 
 /**
  * swap - swaps two elements in an array
- * @a: pointer to the first element
- * @b: pointer to the second element
+ * @a: first element
+ * @b: second element
  */
-void swap(int *a, int *b)
+void swap(int array, ssize a, ssize b)
 {
-	int tmp = *a;
-	*a = *b;
-	*b = tmp;
-}
+	int tmp;
 
+	tmp = array[a];
+	array[a] = array[b];
+	array[b] = tmp;
+}
